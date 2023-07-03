@@ -1,0 +1,212 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Scripts/Reset_level.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sunny-land-files/Sunny-land-assets-files/PNG/environment/layers/middle.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sunny-land-files/Sunny-land-assets-files/PNG/environment/layers/back.png" type="Texture" id=3]
+[ext_resource path="res://itens/banana.tscn" type="PackedScene" id=4]
+[ext_resource path="res://prefabs/checkpoint.tscn" type="PackedScene" id=5]
+[ext_resource path="res://prefabs/Goal.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/mushroom.tscn" type="PackedScene" id=8]
+[ext_resource path="res://prefabs/HUD.tscn" type="PackedScene" id=9]
+[ext_resource path="res://itens/apple.tscn" type="PackedScene" id=10]
+[ext_resource path="res://prefabs/Transition_in.tscn" type="PackedScene" id=11]
+[ext_resource path="res://basetilemap.tres" type="TileSet" id=12]
+[ext_resource path="res://Assets/Seasonal Tilesets/Seasonal Tilesets/1 - Grassland/Background parts/1 - Foreground_scenery.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Seasonal Tilesets/Seasonal Tilesets/1 - Grassland/Background parts/4 - Cloud_cover_2.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Seasonal Tilesets/Seasonal Tilesets/1 - Grassland/Background parts/3 - Cloud_cover_1.png" type="Texture" id=15]
+[ext_resource path="res://music/Music-20230611T132826Z-001/Music/Retro Beat.ogg" type="AudioStream" id=16]
+
+[sub_resource type="Shader" id=44]
+code = "shader_type canvas_item;
+
+uniform vec2 Direction = vec2(1.0,0.0);
+uniform float Speed = 0.02f;
+
+void fragment()
+{
+COLOR = texture(TEXTURE, UV + (Direction * TIME * Speed));
+	
+}"
+
+[sub_resource type="ShaderMaterial" id=45]
+shader = SubResource( 44 )
+shader_param/Direction = Vector2( 1, 0 )
+shader_param/Speed = 0.03
+
+[sub_resource type="GDScript" id=46]
+script/source = "extends Area2D
+
+##fall zone essa parte conecta o fallzone com o ação
+func _on_fallzone_body_entered(body):
+	
+	get_tree().reload_current_scene()
+"
+
+[sub_resource type="RectangleShape2D" id=47]
+extents = Vector2( 94.5, 15.5 )
+
+[node name="Level_02" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2( 159, 144 )
+tile_set = ExtResource( 12 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -1114130, 52, 0, -1114129, 52, 0, -1114128, 52, 0, -1114127, 52, 0, -1114126, 52, 0, -1048594, 52, 0, -1048593, 52, 0, -1048592, 52, 0, -1048591, 52, 0, -1048590, 52, 0, -983058, 52, 0, -983057, 52, 0, -983056, 52, 0, -983055, 52, 0, -983054, 52, 0, -917522, 52, 0, -917521, 52, 0, -917520, 52, 0, -917519, 52, 0, -917518, 52, 0, -851986, 52, 0, -851985, 52, 0, -851984, 52, 0, -851983, 52, 0, -851982, 52, 0, -786450, 52, 0, -786449, 52, 0, -786448, 52, 0, -786447, 52, 0, -786446, 52, 0, -720914, 52, 0, -720913, 52, 0, -720912, 52, 0, -720911, 52, 0, -720910, 52, 0, -655378, 52, 0, -655377, 52, 0, -655376, 52, 0, -655375, 52, 0, -655374, 52, 0, -589842, 52, 0, -589841, 52, 0, -589840, 52, 0, -589839, 52, 0, -589838, 52, 0, -524306, 52, 0, -524305, 52, 0, -524304, 52, 0, -524303, 52, 0, -524302, 57, 0, -458770, 52, 0, -458769, 52, 0, -458768, 52, 0, -458767, 52, 0, -458766, 52, 0, -393234, 52, 0, -393233, 52, 0, -393232, 52, 0, -393231, 52, 0, -393230, 52, 0, -393229, 66, 0, -458741, 48, 0, -458740, 48, 0, -458739, 48, 0, -458738, 48, 0, -458734, 47, 0, -458733, 48, 0, -458732, 54, 0, -327698, 52, 0, -327697, 52, 0, -327696, 52, 0, -327695, 52, 0, -327694, 52, 0, -327693, 66, 0, -262162, 52, 0, -262161, 52, 0, -262160, 52, 0, -262159, 52, 0, -262158, 52, 0, -262157, 66, 0, -327671, 48, 0, -327659, 47, 0, -327658, 48, 0, -327657, 54, 0, -327650, 47, 0, -327649, 48, 0, -327648, 54, 0, -196626, 118, 0, -196625, 118, 0, -196624, 118, 0, -196623, 95, 0, -196622, 102, 0, -262137, 48, 0, -131090, 118, 0, -131089, 118, 0, -131088, 114, 0, -131087, 95, 0, -131086, 114, 0, -196605, 48, 0, -196604, 48, 0, -196603, 48, 0, -196583, 47, 0, -196582, 48, 0, -196581, 54, 0, -196571, 43, 0, -196570, 44, 0, -196569, 44, 0, -196568, 44, 0, -196567, 44, 0, -196566, 44, 0, -196565, 44, 0, -196564, 44, 0, -196563, 44, 0, -196562, 44, 0, -196561, 44, 0, -196560, 44, 0, -196559, 45, 0, -65554, 118, 0, -65553, 118, 0, -65552, 118, 0, -65551, 95, 0, -65550, 102, 0, -131035, 46, 0, -131034, 46, 0, -131033, 46, 0, -131032, 46, 0, -131031, 46, 0, -131030, 46, 0, -131029, 46, 0, -131028, 46, 0, -131027, 46, 0, -131026, 46, 0, -131025, 46, 0, -131024, 46, 0, -131023, 46, 0, -18, 52, 0, -17, 52, 0, -16, 52, 0, -15, 52, 0, -14, 50, 0, -13, 43, 0, -12, 43, 0, -11, 43, 0, -10, 44, 0, -9, 44, 0, -8, 44, 0, -7, 44, 0, -6, 44, 0, -5, 44, 0, -4, 44, 0, -3, 44, 0, -2, 44, 0, -1, 44, 0, -65536, 44, 0, -65535, 44, 0, -65534, 44, 0, -65533, 44, 0, -65532, 44, 0, -65531, 44, 0, -65530, 44, 0, -65529, 44, 0, -65528, 44, 0, -65527, 44, 0, -65526, 44, 0, -65525, 44, 0, -65524, 44, 0, -65523, 44, 0, -65522, 44, 0, -65500, 47, 0, -65499, 46, 0, -65498, 46, 0, -65497, 46, 0, -65496, 46, 0, -65495, 46, 0, -65494, 46, 0, -65493, 46, 0, -65492, 46, 0, -65491, 46, 0, -65490, 46, 0, -65489, 46, 0, -65488, 46, 0, -65487, 46, 0, 65522, 50, 0, 65523, 55, 0, 65524, 46, 0, 65525, 46, 0, 65526, 46, 0, 65527, 46, 0, 65528, 46, 0, 65529, 46, 0, 65530, 46, 0, 65531, 46, 0, 65532, 46, 0, 65533, 46, 0, 65534, 46, 0, 65535, 46, 0, 0, 46, 0, 1, 46, 0, 2, 46, 0, 3, 46, 0, 4, 46, 0, 5, 46, 0, 6, 46, 0, 7, 46, 0, 8, 46, 0, 9, 46, 0, 10, 46, 0, 11, 46, 0, 12, 46, 0, 13, 46, 0, 14, 46, 0, 42, 48, 0, 45, 48, 0, 49, 47, 0, 131058, 50, 0, 131059, 55, 0, 131060, 55, 0, 131061, 46, 0, 131062, 46, 0, 131063, 55, 0, 131064, 55, 0, 131065, 46, 0, 131066, 46, 0, 131067, 46, 0, 131068, 46, 0, 131069, 46, 0, 131070, 46, 0, 131071, 46, 0, 65536, 46, 0, 65537, 46, 0, 65538, 46, 0, 65539, 46, 0, 65540, 46, 0, 65541, 46, 0, 65542, 46, 0, 65543, 46, 0, 65544, 46, 0, 65545, 46, 0, 65546, 46, 0, 65547, 46, 0, 65548, 46, 0, 65549, 46, 0, 65550, 46, 0, 196594, 49, 0, 196595, 46, 0, 196596, 46, 0, 196597, 46, 0, 196598, 55, 0, 196599, 55, 0, 196600, 55, 0, 196601, 46, 0, 196602, 46, 0, 196603, 46, 0, 196604, 46, 0, 196605, 46, 0, 196606, 46, 0, 196607, 46, 0, 131072, 46, 0, 131073, 46, 0, 131074, 46, 0, 131075, 46, 0, 131076, 46, 0, 131077, 46, 0, 131078, 46, 0, 131079, 46, 0, 131080, 46, 0, 131081, 46, 0, 131082, 46, 0, 131083, 46, 0, 131084, 46, 0, 131085, 46, 0, 131086, 46, 0 )
+
+[node name="fruits" type="Node" parent="."]
+
+[node name="apple" parent="fruits" instance=ExtResource( 10 )]
+position = Vector2( 150, 101 )
+
+[node name="apple2" parent="fruits" instance=ExtResource( 10 )]
+position = Vector2( 362, 113 )
+
+[node name="apple3" parent="fruits" instance=ExtResource( 10 )]
+position = Vector2( 219, 88 )
+
+[node name="apple4" parent="fruits" instance=ExtResource( 10 )]
+position = Vector2( 244, 87 )
+
+[node name="apple5" parent="fruits" instance=ExtResource( 10 )]
+position = Vector2( 469, 22 )
+
+[node name="banana" parent="fruits" instance=ExtResource( 4 )]
+position = Vector2( 521, 56 )
+
+[node name="banana2" parent="fruits" instance=ExtResource( 4 )]
+position = Vector2( 774, 83 )
+
+[node name="banana3" parent="fruits" instance=ExtResource( 4 )]
+position = Vector2( 774, 64 )
+
+[node name="banana4" parent="fruits" instance=ExtResource( 4 )]
+position = Vector2( 775, 45 )
+
+[node name="Checkpoints" type="Node2D" parent="."]
+position = Vector2( -1, 7 )
+
+[node name="checkpoint" parent="Checkpoints" instance=ExtResource( 5 )]
+position = Vector2( 588, 83 )
+
+[node name="checkpoint2" parent="Checkpoints" instance=ExtResource( 5 )]
+position = Vector2( 373, 17 )
+
+[node name="goal" parent="." instance=ExtResource( 6 )]
+position = Vector2( 929, 64 )
+
+[node name="Player" parent="." instance=ExtResource( 7 )]
+position = Vector2( 39, 95 )
+
+[node name="mushroom" parent="." instance=ExtResource( 8 )]
+position = Vector2( 148, 121 )
+script = null
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="sky" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 288, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/sky"]
+position = Vector2( -128, -304 )
+scale = Vector2( 2.25, 2.26667 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="clouds" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 288, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/clouds"]
+material = SubResource( 45 )
+position = Vector2( 0, -240 )
+scale = Vector2( 2.33333, 2 )
+texture = ExtResource( 15 )
+centered = false
+
+[node name="cloud-mountain" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
+motion_scale = Vector2( 0.6, 1 )
+motion_mirroring = Vector2( 288, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/cloud-mountain"]
+position = Vector2( 0, -240 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 14 )
+centered = false
+
+[node name="mountain-trees" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.7, 1 )
+motion_mirroring = Vector2( 288, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/mountain-trees"]
+position = Vector2( 320, -160 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="mountain-trees2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.7, 1 )
+motion_mirroring = Vector2( 288, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/mountain-trees2"]
+position = Vector2( -130, -144 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="fg-trees" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
+motion_scale = Vector2( 0.8, 1 )
+motion_mirroring = Vector2( 288, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/fg-trees"]
+position = Vector2( -16, -240 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 13 )
+centered = false
+
+[node name="fallzone" type="Area2D" parent="."]
+position = Vector2( 496, 176 )
+collision_layer = 14
+script = SubResource( 46 )
+
+[node name="Collision" type="CollisionShape2D" parent="fallzone"]
+position = Vector2( -10, 32 )
+shape = SubResource( 47 )
+
+[node name="fallzone2" type="Area2D" parent="."]
+position = Vector2( 496, 176 )
+collision_layer = 14
+script = SubResource( 46 )
+
+[node name="Collision" type="CollisionShape2D" parent="fallzone2"]
+position = Vector2( 185, 31 )
+shape = SubResource( 47 )
+
+[node name="HUD" parent="." instance=ExtResource( 9 )]
+
+[node name="score" parent="HUD/HBoxContainer/Holder" index="1"]
+margin_left = 122.0
+margin_top = -2.0
+margin_right = 234.0
+margin_bottom = 14.2
+
+[node name="lifes" parent="HUD/HBoxContainer/Holder2" index="0"]
+margin_left = 6.0
+margin_right = 104.0
+
+[node name="Transition_in" parent="." instance=ExtResource( 11 )]
+
+[node name="music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 16 )
+volume_db = -15.0
+autoplay = true
+
+[connection signal="body_entered" from="fallzone" to="Player" method="_on_fallzone_body_entered"]
+[connection signal="body_entered" from="fallzone" to="fallzone" method="_on_fallzone_body_entered"]
+[connection signal="body_entered" from="fallzone2" to="Player" method="_on_fallzone_body_entered"]
+[connection signal="body_entered" from="fallzone2" to="fallzone2" method="_on_fallzone_body_entered"]
+
+[editable path="HUD"]

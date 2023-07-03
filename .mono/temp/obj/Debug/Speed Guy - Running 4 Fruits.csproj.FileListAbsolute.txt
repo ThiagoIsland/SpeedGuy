@@ -1,0 +1,11 @@
+D:\PROJETOS\SPEEDGUY3-5-2\PROJETOA3\.mono\temp\obj\Debug\Speed Guy - Running 4 Fruits.csproj.AssemblyReference.cache
+D:\PROJETOS\SPEEDGUY3-5-2\PROJETOA3\.mono\temp\obj\Debug\Speed Guy - Running 4 Fruits.GeneratedMSBuildEditorConfig.editorconfig
+D:\PROJETOS\SPEEDGUY3-5-2\PROJETOA3\.mono\temp\obj\Debug\Speed Guy - Running 4 Fruits.AssemblyInfoInputs.cache
+D:\PROJETOS\SPEEDGUY3-5-2\PROJETOA3\.mono\temp\obj\Debug\Speed Guy - Running 4 Fruits.AssemblyInfo.cs
+D:\PROJETOS\SPEEDGUY3-5-2\PROJETOA3\.mono\temp\obj\Debug\Speed Guy - Running 4 Fruits.csproj.CoreCompileInputs.cache
+D:\PROJETOS\SPEEDGUY3-5-2\PROJETOA3\.mono\temp\bin\Debug\Speed Guy - Running 4 Fruits.dll
+D:\PROJETOS\SPEEDGUY3-5-2\PROJETOA3\.mono\temp\bin\Debug\Speed Guy - Running 4 Fruits.pdb
+D:\PROJETOS\SPEEDGUY3-5-2\PROJETOA3\.mono\temp\bin\Debug\Npgsql.dll
+D:\PROJETOS\SPEEDGUY3-5-2\PROJETOA3\.mono\temp\obj\Debug\Speed Guy - Running 4 Fruits.csproj.CopyComplete
+D:\PROJETOS\SPEEDGUY3-5-2\PROJETOA3\.mono\temp\obj\Debug\Speed Guy - Running 4 Fruits.dll
+D:\PROJETOS\SPEEDGUY3-5-2\PROJETOA3\.mono\temp\obj\Debug\Speed Guy - Running 4 Fruits.pdb

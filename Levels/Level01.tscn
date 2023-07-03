@@ -1,0 +1,212 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Seasonal Tilesets/Seasonal Tilesets/1 - Grassland/Background parts/1 - Foreground_scenery.png" type="Texture" id=2]
+[ext_resource path="res://basetilemap.tres" type="TileSet" id=3]
+[ext_resource path="res://itens/apple.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Sunny-land-files/Sunny-land-assets-files/PNG/environment/layers/back.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Seasonal Tilesets/Seasonal Tilesets/1 - Grassland/Background parts/4 - Cloud_cover_2.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Seasonal Tilesets/Seasonal Tilesets/1 - Grassland/Background parts/3 - Cloud_cover_1.png" type="Texture" id=7]
+[ext_resource path="res://itens/banana.tscn" type="PackedScene" id=8]
+[ext_resource path="res://music/Music-20230611T132826Z-001/Music/Swinging Pants.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Assets/Sunny-land-files/Sunny-land-assets-files/PNG/environment/layers/middle.png" type="Texture" id=10]
+[ext_resource path="res://Scenes/mushroom.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scripts/Reset_level.gd" type="Script" id=12]
+[ext_resource path="res://prefabs/HUD.tscn" type="PackedScene" id=13]
+[ext_resource path="res://prefabs/Transition_in.tscn" type="PackedScene" id=14]
+[ext_resource path="res://prefabs/checkpoint.tscn" type="PackedScene" id=15]
+[ext_resource path="res://prefabs/Goal.tscn" type="PackedScene" id=16]
+
+[sub_resource type="Shader" id=44]
+code = "shader_type canvas_item;
+
+uniform vec2 Direction = vec2(1.0,0.0);
+uniform float Speed = 0.02f;
+
+void fragment()
+{
+COLOR = texture(TEXTURE, UV + (Direction * TIME * Speed));
+	
+}"
+
+[sub_resource type="ShaderMaterial" id=45]
+shader = SubResource( 44 )
+shader_param/Direction = Vector2( 1, 0 )
+shader_param/Speed = 0.03
+
+[sub_resource type="GDScript" id=46]
+script/source = "extends Area2D
+
+##fall zone essa parte conecta o fallzone com o ação
+func _on_fallzone_body_entered(body):
+	
+	get_tree().reload_current_scene()
+"
+
+[sub_resource type="RectangleShape2D" id=47]
+extents = Vector2( 90, 10 )
+
+[node name="Level_01" type="Node2D"]
+script = ExtResource( 12 )
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2( 159, 144 )
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -1507342, 52, 0, -1507341, 46, 0, -1507340, 46, 0, -1507339, 46, 0, -1441806, 52, 0, -1441805, 46, 0, -1441804, 46, 0, -1441803, 46, 0, -1376270, 52, 0, -1376269, 46, 0, -1376268, 46, 0, -1376267, 46, 0, -1310734, 52, 0, -1310733, 46, 0, -1310732, 46, 0, -1310731, 46, 0, -1245198, 52, 0, -1245197, 46, 0, -1245196, 46, 0, -1245195, 46, 0, -1179662, 52, 0, -1179661, 46, 0, -1179660, 46, 0, -1179659, 46, 0, -1114126, 52, 0, -1114125, 46, 0, -1114124, 46, 0, -1114123, 46, 0, -1179594, 44, 0, -1179593, 44, 0, -1048590, 52, 0, -1048589, 46, 0, -1048588, 46, 0, -1048587, 46, 0, -1114058, 50, 0, -1114057, 50, 0, -983054, 52, 0, -983053, 50, 0, -983052, 46, 0, -983051, 46, 0, -1048522, 50, 0, -1048521, 50, 0, -917518, 52, 0, -917517, 50, 0, -917516, 46, 0, -917515, 46, 0, -982986, 50, 0, -982985, 50, 0, -851982, 52, 0, -851981, 46, 0, -851980, 46, 0, -851979, 46, 0, -917450, 50, 0, -917449, 50, 0, -786446, 52, 0, -786445, 46, 0, -786444, 46, 0, -786443, 46, 0, -851914, 50, 0, -851913, 44, 0, -720910, 52, 0, -720909, 46, 0, -720908, 46, 0, -720907, 46, 0, -786378, 50, 0, -786377, 50, 0, -655374, 52, 0, -655373, 55, 0, -655372, 55, 0, -655371, 46, 0, -720877, 62, 0, -720876, 62, 0, -720875, 62, 0, -720842, 50, 0, -720841, 50, 0, -720840, 50, 0, -589838, 52, 0, -589837, 55, 0, -589836, 55, 0, -589835, 46, 0, -655341, 44, 0, -655340, 44, 0, -655339, 44, 0, -655306, 50, 0, -655305, 50, 0, -655304, 50, 0, -524302, 52, 0, -524301, 46, 0, -524300, 46, 0, -524299, 46, 0, -524298, 66, 0, -589808, 47, 0, -589807, 48, 0, -589806, 48, 0, -589805, 46, 0, -589804, 46, 0, -589803, 46, 0, -589802, 66, 0, -589770, 50, 0, -589769, 50, 0, -589768, 50, 0, -458766, 52, 0, -458765, 46, 0, -458764, 46, 0, -458763, 46, 0, -524269, 46, 0, -524268, 46, 0, -524267, 46, 0, -524234, 50, 0, -524233, 50, 0, -524232, 50, 0, -393230, 52, 0, -393229, 46, 0, -458732, 75, 0, -458698, 50, 0, -458697, 50, 0, -458696, 50, 0, -327694, 52, 0, -327693, 46, 0, -327690, 66, 0, -393203, 47, 0, -393202, 48, 0, -393201, 54, 0, -393196, 75, 0, -393162, 50, 0, -393161, 50, 0, -393160, 50, 0, -262158, 50, 0, -262157, 46, 0, -327660, 75, 0, -327626, 50, 0, -327625, 96, 0, -327624, 97, 0, -196622, 50, 0, -196621, 46, 0, -262124, 75, 0, -262090, 50, 0, -262089, 98, 0, -262088, 99, 0, -262087, 102, 0, -131086, 50, 0, -131085, 46, 0, -196608, 43, 0, -196607, 45, 0, -196595, 43, 0, -196594, 45, 0, -196589, 46, 0, -196588, 61, 0, -196587, 50, 0, -196554, 102, 0, -196553, 102, 0, -196552, 102, 0, -196551, 102, 0, -196550, 102, 0, -65550, 55, 0, -65549, 55, 0, -65546, 75, 0, -65545, 75, 0, -65544, 62, 0, -65543, 62, 0, -65542, 62, 0, -65540, 63, 0, -131072, 46, 0, -131071, 46, 0, -131059, 46, 0, -131058, 46, 0, -131053, 96, 0, -131052, 97, 0, -131051, 55, 0, -131018, 114, 0, -131017, 116, 0, -131016, 102, 0, -131015, 102, 0, -131014, 102, 0, -14, 50, 0, -13, 55, 0, -12, 55, 0, -11, 46, 0, -10, 44, 0, -9, 44, 0, -8, 44, 0, -7, 44, 0, -6, 44, 0, -5, 44, 0, -4, 44, 0, -3, 44, 0, -2, 44, 0, -1, 44, 0, -65536, 46, 0, -65535, 46, 0, -65523, 46, 0, -65522, 46, 0, -65517, 70, 0, -65516, 56, 0, -65515, 72, 0, -65514, 157, 0, -65513, 54, 0, -65510, 63, 0, -65509, 63, 0, -65501, 63, 0, -65500, 63, 0, -65499, 63, 0, -65498, 75, 0, -65496, 76, 0, -65482, 102, 0, -65481, 102, 0, -65480, 102, 0, -65479, 102, 0, -65478, 102, 0, 65522, 50, 0, 65523, 55, 0, 65524, 46, 0, 65525, 46, 0, 65526, 46, 0, 65527, 46, 0, 65528, 46, 0, 65529, 46, 0, 65530, 46, 0, 65531, 46, 0, 65532, 46, 0, 65533, 46, 0, 65534, 46, 0, 65535, 46, 0, 0, 46, 0, 1, 46, 0, 2, 44, 0, 3, 44, 0, 4, 44, 0, 5, 44, 0, 6, 44, 0, 7, 44, 0, 8, 44, 0, 9, 44, 0, 10, 44, 0, 11, 44, 0, 12, 44, 0, 13, 46, 0, 14, 46, 0, 26, 44, 0, 27, 44, 0, 28, 44, 0, 29, 44, 0, 30, 44, 0, 31, 44, 0, 32, 44, 0, 33, 44, 0, 34, 44, 0, 35, 44, 0, 36, 44, 0, 37, 44, 0, 38, 44, 0, 39, 44, 0, 40, 44, 0, 42, 48, 0, 45, 48, 0, 49, 47, 0, 50, 44, 0, 51, 44, 0, 52, 44, 0, 53, 44, 0, 54, 44, 0, 55, 50, 0, 56, 50, 0, 57, 102, 0, 131058, 50, 0, 131059, 55, 0, 131060, 55, 0, 131061, 46, 0, 131062, 46, 0, 131063, 55, 0, 131064, 55, 0, 131065, 46, 0, 131066, 46, 0, 131067, 46, 0, 131068, 46, 0, 131069, 46, 0, 131070, 46, 0, 131071, 46, 0, 65536, 46, 0, 65537, 46, 0, 65538, 46, 0, 65539, 46, 0, 65540, 46, 0, 65541, 46, 0, 65542, 46, 0, 65543, 46, 0, 65544, 46, 0, 65545, 46, 0, 65546, 95, 0, 65547, 46, 0, 65548, 95, 0, 65549, 46, 0, 65550, 46, 0, 65562, 46, 0, 65563, 95, 0, 65564, 46, 0, 65565, 46, 0, 65566, 46, 0, 65567, 46, 0, 65568, 46, 0, 65569, 46, 0, 65570, 46, 0, 65571, 46, 0, 65572, 46, 0, 65573, 46, 0, 65574, 46, 0, 65575, 46, 0, 65576, 46, 0, 65586, 50, 0, 65587, 95, 0, 65588, 50, 0, 65589, 50, 0, 65590, 50, 0, 65591, 50, 0, 196594, 49, 0, 196595, 46, 0, 196596, 46, 0, 196597, 46, 0, 196598, 55, 0, 196599, 55, 0, 196600, 55, 0, 196601, 46, 0, 196602, 46, 0, 196603, 46, 0, 196604, 46, 0, 196605, 46, 0, 196606, 46, 0, 196607, 46, 0, 131072, 46, 0, 131073, 46, 0, 131074, 46, 0, 131075, 46, 0, 131076, 46, 0, 131077, 46, 0, 131078, 46, 0, 131079, 46, 0, 131080, 46, 0, 131081, 46, 0, 131082, 46, 0, 131083, 46, 0, 131084, 95, 0, 131085, 46, 0, 131086, 46, 0, 131098, 46, 0, 131099, 46, 0, 131100, 46, 0, 131101, 46, 0, 131102, 46, 0, 131103, 46, 0, 131104, 46, 0, 131105, 46, 0, 131106, 46, 0, 131107, 46, 0, 131108, 46, 0, 131109, 46, 0, 131110, 46, 0, 131111, 46, 0, 131112, 46, 0, 131113, 66, 0, 131121, 67, 0, 131122, 50, 0, 131123, 50, 0, 131124, 50, 0, 131125, 50, 0, 131126, 50, 0, 131127, 50, 0, 196658, 50, 0, 196659, 50, 0, 196660, 50, 0, 196661, 50, 0, 196662, 50, 0, 196663, 50, 0, 262193, 93, 0, 262194, 50, 0, 262195, 50, 0, 262196, 50, 0, 262197, 50, 0, 262198, 50, 0, 262199, 50, 0 )
+
+[node name="fruits" type="Node" parent="."]
+
+[node name="apple" parent="fruits" instance=ExtResource( 4 )]
+position = Vector2( 131, 120 )
+
+[node name="apple2" parent="fruits" instance=ExtResource( 4 )]
+position = Vector2( 175, 86 )
+
+[node name="apple3" parent="fruits" instance=ExtResource( 4 )]
+position = Vector2( 388, 40 )
+
+[node name="apple4" parent="fruits" instance=ExtResource( 4 )]
+position = Vector2( 384, 86 )
+
+[node name="apple5" parent="fruits" instance=ExtResource( 4 )]
+position = Vector2( 488, -28 )
+
+[node name="banana" parent="fruits" instance=ExtResource( 8 )]
+position = Vector2( 147, 119 )
+
+[node name="banana2" parent="fruits" instance=ExtResource( 8 )]
+position = Vector2( 522, 119 )
+
+[node name="banana3" parent="fruits" instance=ExtResource( 8 )]
+position = Vector2( 521, 101 )
+
+[node name="banana4" parent="fruits" instance=ExtResource( 8 )]
+position = Vector2( 521, 84 )
+
+[node name="Checkpoints" type="Node2D" parent="."]
+position = Vector2( -1, 7 )
+
+[node name="checkpoint" parent="Checkpoints" instance=ExtResource( 15 )]
+position = Vector2( 326, 137 )
+
+[node name="checkpoint2" parent="Checkpoints" instance=ExtResource( 15 )]
+position = Vector2( 677, 137 )
+
+[node name="goal" parent="." instance=ExtResource( 16 )]
+position = Vector2( 1000, 112 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 39, 95 )
+
+[node name="mushroom" parent="." instance=ExtResource( 11 )]
+position = Vector2( 284, 136 )
+script = null
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="sky" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 288, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/sky"]
+position = Vector2( -128, -304 )
+scale = Vector2( 2.25, 2.26667 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="clouds" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 288, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/clouds"]
+material = SubResource( 45 )
+position = Vector2( 0, -240 )
+scale = Vector2( 2.33333, 2 )
+texture = ExtResource( 7 )
+centered = false
+
+[node name="cloud-mountain" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
+motion_scale = Vector2( 0.6, 1 )
+motion_mirroring = Vector2( 288, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/cloud-mountain"]
+position = Vector2( 0, -240 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="mountain-trees" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.7, 1 )
+motion_mirroring = Vector2( 288, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/mountain-trees"]
+position = Vector2( 320, -160 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+centered = false
+
+[node name="mountain-trees2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.7, 1 )
+motion_mirroring = Vector2( 288, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/mountain-trees2"]
+position = Vector2( -126, -144 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+centered = false
+
+[node name="fg-trees" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
+motion_scale = Vector2( 0.8, 1 )
+motion_mirroring = Vector2( 288, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/fg-trees"]
+position = Vector2( -16, -240 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="fallzone" type="Area2D" parent="."]
+position = Vector2( 496, 176 )
+collision_layer = 14
+script = SubResource( 46 )
+
+[node name="Collision" type="CollisionShape2D" parent="fallzone"]
+position = Vector2( -10, 32 )
+shape = SubResource( 47 )
+
+[node name="fallzone2" type="Area2D" parent="."]
+position = Vector2( 496, 176 )
+collision_layer = 14
+script = SubResource( 46 )
+
+[node name="Collision" type="CollisionShape2D" parent="fallzone2"]
+position = Vector2( 355, 38 )
+shape = SubResource( 47 )
+
+[node name="HUD" parent="." instance=ExtResource( 13 )]
+
+[node name="score" parent="HUD/HBoxContainer/Holder" index="1"]
+margin_left = 122.0
+margin_top = -2.0
+margin_right = 234.0
+margin_bottom = 14.2
+
+[node name="lifes" parent="HUD/HBoxContainer/Holder2" index="0"]
+margin_left = 6.0
+margin_right = 104.0
+
+[node name="Transition_in" parent="." instance=ExtResource( 14 )]
+
+[node name="music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+volume_db = -15.0
+autoplay = true
+
+[connection signal="body_entered" from="fallzone" to="Player" method="_on_fallzone_body_entered"]
+[connection signal="body_entered" from="fallzone" to="fallzone" method="_on_fallzone_body_entered"]
+[connection signal="body_entered" from="fallzone2" to="Player" method="_on_fallzone_body_entered"]
+[connection signal="body_entered" from="fallzone2" to="fallzone2" method="_on_fallzone_body_entered"]
+
+[editable path="HUD"]

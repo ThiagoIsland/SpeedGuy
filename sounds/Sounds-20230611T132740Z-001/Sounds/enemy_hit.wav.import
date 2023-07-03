@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/enemy_hit.wav-b0d9723454f2fd04486b5e443e650ebd.sample"
+
+[deps]
+
+source_file="res://sounds/Sounds-20230611T132740Z-001/Sounds/enemy_hit.wav"
+dest_files=[ "res://.import/enemy_hit.wav-b0d9723454f2fd04486b5e443e650ebd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

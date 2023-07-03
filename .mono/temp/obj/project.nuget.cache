@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "9DShU6dbe1whTmuE4196edWXzA6XsoebOACn/BTx+B2PquM9lRXIep+Vs7l4Gly4zUIPg5hTyrI/5edNoMIevQ==",
+  "success": true,
+  "projectFilePath": "D:\\PROJETOS\\SPEEDGUY3-5-2\\PROJETOA3\\Speed Guy - Running 4 Fruits.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\thiag\\.nuget\\packages\\npgsql\\3.0.2\\npgsql.3.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
